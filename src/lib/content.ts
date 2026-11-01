@@ -1,52 +1,92 @@
-export const industries = [
-  "Comercio y retail",
-  "Salud y bienestar",
-  "Inmobiliario",
-  "Automotriz",
-  "Servicios profesionales",
-  "Construcción",
-  "Educación",
-  "Gastronomía",
-  "Logística",
-  "Startups",
-];
-
 export const services = [
   {
-    title: "Sitios web corporativos",
+    title: "Desarrollo web",
     summary:
-      "Sitios rápidos y bien estructurados que explican qué haces, generan confianza y convierten visitas en conversaciones.",
-    items: ["Arquitectura de contenidos", "SEO técnico", "Copy orientado a conversión"],
+      "Sitios corporativos rápidos y bien estructurados, que explican con claridad qué haces y facilitan que tus clientes te contacten.",
+    items: ["Sitios corporativos y landing pages", "SEO técnico", "Contenido administrable"],
   },
   {
     title: "E-commerce y catálogos",
     summary:
-      "Tiendas y catálogos con filtros, fichas de producto cuidadas y medios de pago chilenos integrados.",
+      "Tiendas y catálogos con fichas de producto cuidadas, filtros útiles y medios de pago chilenos integrados.",
     items: ["Webpay · Flow · Mercado Pago", "Gestión de inventario", "Catálogos filtrables"],
   },
   {
-    title: "Plataformas a medida",
+    title: "Software y plataformas a medida",
     summary:
-      "Paneles de administración, sistemas de reservas, portales de clientes e intranets construidos para tu operación.",
+      "Herramientas construidas para tu operación: paneles de administración, sistemas de reservas, portales de clientes e intranets.",
     items: ["Paneles internos", "Reservas y agendas", "Roles y permisos"],
   },
   {
     title: "Integraciones y automatización",
     summary:
-      "Conectamos tu web con las herramientas que ya usas para que la información fluya sin trabajo manual.",
+      "Conectamos tu sitio o sistema con las herramientas que ya usas, para que la información fluya sin trabajo manual.",
     items: ["WhatsApp Business", "CRM y correo", "Notificaciones automáticas"],
   },
+];
+
+export const capabilities = [
   {
     title: "Diseño UI/UX",
-    summary:
-      "Interfaces claras y consistentes, diseñadas a partir de cómo piensan y compran tus clientes.",
-    items: ["Prototipos navegables", "Sistemas de diseño", "Pruebas de usabilidad"],
+    body: "Interfaces claras y consistentes, diseñadas a partir de cómo usan tu producto tus clientes.",
   },
   {
-    title: "Mantención y evolución",
-    summary:
-      "Después del lanzamiento seguimos contigo: mejoras, monitoreo, respaldos y nuevas funcionalidades.",
-    items: ["Soporte continuo", "Monitoreo y respaldos", "Mejoras por etapas"],
+    title: "Mantenimiento y evolución",
+    body: "Soporte, actualizaciones y nuevas funcionalidades una vez que tu proyecto está en marcha.",
+  },
+];
+
+export type Project = {
+  name: string;
+  /** "client": encargo de un cliente · "product": producto propio de Clikium */
+  kind: "client" | "product";
+  category: string;
+  year?: string;
+  url: string;
+  /** Captura de página completa (se recorre en el marco del navegador) */
+  image: { src: string; width: number; height: number };
+  need: string;
+  solution: string;
+  features: string[];
+  stack?: string[];
+};
+
+export const projects: Project[] = [
+  {
+    name: "RealCars Company",
+    kind: "client",
+    category: "Plataforma web · Automotriz",
+    year: "2025",
+    url: "https://realcarscompany.cl",
+    image: { src: "/realcars-full.webp", width: 1440, height: 3818 },
+    need: "Una automotora que necesitaba mostrar su inventario, recibir vehículos en consignación y administrar su catálogo sin depender de terceros.",
+    solution:
+      "Una plataforma a medida con catálogo filtrable, módulo de consignación, pagos en línea y un panel interno para gestionar el inventario.",
+    features: [
+      "Catálogo con búsqueda por marca, modelo y precio",
+      "Módulo de consignación a medida",
+      "Pagos integrados con Flow",
+      "Panel de administración propio",
+      "Integración con WhatsApp Business",
+    ],
+    stack: ["Next.js", "TypeScript", "Vercel", "Flow API", "WhatsApp API"],
+  },
+  {
+    name: "AuraBook",
+    kind: "product",
+    category: "SaaS · Reservas y agendamiento",
+    url: "https://aurabook.cl/",
+    image: { src: "/aurabook-full.webp", width: 1440, height: 4134 },
+    need: "Los negocios que atienden con hora suelen coordinar sus reservas por mensajes, con tiempo perdido y horarios cruzados.",
+    solution:
+      "Una página de reservas con la marca de cada negocio: sus clientes eligen servicio, profesional y hora desde el celular, y el equipo lo gestiona todo desde un panel simple.",
+    features: [
+      "Página de reservas con la marca del negocio",
+      "Disponibilidad según duración, pausas y horarios",
+      "Sin reservas duplicadas en un mismo horario",
+      "Avisos y recordatorios por correo",
+      "Panel semanal y gestión del equipo",
+    ],
   },
 ];
 
@@ -54,84 +94,85 @@ export const process = [
   {
     title: "Diagnóstico",
     duration: "1 semana",
-    body: "Conversamos sobre tu negocio, tus clientes y tus objetivos. Definimos alcance, prioridades y una propuesta con plazos y costos cerrados.",
+    body: "Entendemos tu negocio y tus objetivos. Definimos alcance, prioridades y una propuesta detallada.",
   },
   {
     title: "Diseño",
     duration: "1–2 semanas",
-    body: "Estructura, contenidos e interfaz. Revisas prototipos reales antes de escribir una línea de código, y ajustamos hasta que funcione.",
+    body: "Estructura, contenidos e interfaz. Revisas prototipos antes de pasar a desarrollo.",
   },
   {
     title: "Desarrollo",
     duration: "2–6 semanas",
-    body: "Construimos con tecnología moderna y entregas parciales. Ves el avance en un entorno de pruebas durante todo el proceso.",
+    body: "Construimos con entregas parciales. Sigues el avance en un entorno de pruebas.",
   },
   {
     title: "Lanzamiento y acompañamiento",
     duration: "Continuo",
-    body: "Publicamos, medimos y te capacitamos. Quedamos disponibles para soporte y para la siguiente etapa de tu proyecto.",
+    body: "Publicamos, te capacitamos y seguimos disponibles para soporte y nuevas etapas.",
   },
 ];
 
 export const principles = [
   {
-    title: "Sin plantillas",
-    body: "Cada proyecto se diseña y programa desde cero para tu marca y tu operación. Nada de temas reciclados.",
+    title: "Soluciones adaptadas a cada negocio",
+    body: "Partimos de cómo funciona tu operación, no de una plantilla. El alcance se define según lo que de verdad necesitas.",
   },
   {
-    title: "Hablas con quien construye",
-    body: "Sin intermediarios ni cadenas de correos. Trabajas directamente con el equipo que diseña y desarrolla.",
+    title: "Trato directo y comunicación transparente",
+    body: "Hablas con quienes diseñan y desarrollan tu proyecto. Siempre sabes en qué etapa está y qué viene después.",
   },
   {
-    title: "Rendimiento medible",
-    body: "Sitios optimizados para cargar rápido, posicionar en Google y funcionar impecable en el celular.",
+    title: "Desarrollo orientado a necesidades reales",
+    body: "Priorizamos lo que aporta a tu negocio y a tus clientes, construido con estándares que permiten crecer.",
   },
   {
-    title: "Tu proyecto es tuyo",
-    body: "Dominio, código y accesos quedan a tu nombre. Sin dependencias forzadas ni letras chicas.",
+    title: "Acompañamiento y evolución",
+    body: "El lanzamiento no es el final. Seguimos disponibles para soporte, mejoras y las siguientes etapas.",
   },
 ];
 
-export const featuredCase = {
-  client: "RealCars Company",
-  url: "https://realcarscompany.cl",
-  sector: "Automotriz · Venta y consignación",
-  year: "2025",
-  summary:
-    "Plataforma para una automotora premium en Chile: catálogo filtrable, módulo de consignación, pagos en línea y un panel interno para gestionar el inventario sin depender de terceros.",
-  scope: [
-    "Catálogo con búsqueda por marca, modelo y precio",
-    "Módulo de consignación a medida",
-    "Pagos integrados con Flow",
-    "Panel de administración propio",
-    "Integración con WhatsApp Business",
+export const about = {
+  /**
+   * Fotografía real del fundador o del equipo. Mientras sea null, la sección
+   * muestra una composición de marca en su lugar.
+   * Ejemplo: { src: "/equipo.jpg", alt: "Equipo de Clikium en Santiago", width: 1200, height: 1500 }
+   */
+  photo: null as { src: string; alt: string; width: number; height: number } | null,
+  paragraphs: [
+    "Clikium SpA es una empresa chilena de software y soluciones digitales. Diseñamos, construimos y mantenemos sitios, plataformas e integraciones para empresas que necesitan que la tecnología trabaje a favor de su negocio.",
+    "Además de los proyectos para clientes, desarrollamos productos propios como AuraBook. Operarlos a diario nos obliga a cuidar lo mismo que cuidamos en cada encargo: estabilidad, claridad y evolución continua.",
   ],
-  stack: ["Next.js", "TypeScript", "Vercel", "Flow API", "WhatsApp API"],
+  facts: [
+    { label: "Razón social", value: "Clikium SpA" },
+    { label: "Base", value: "Santiago, Chile" },
+    { label: "Producto propio", value: "AuraBook", href: "https://aurabook.cl/" },
+  ],
 };
 
 export const faqs = [
   {
-    q: "¿Trabajan con empresas de cualquier rubro?",
-    a: "Sí. Lo importante no es el rubro sino entender cómo opera tu negocio y qué necesitan tus clientes. Por eso cada proyecto parte con un diagnóstico, no con una plantilla.",
+    q: "¿Cuánto cuesta desarrollar un sitio web?",
+    a: "Depende del alcance: secciones, funcionalidades, integraciones y contenidos. Por eso no publicamos precios fijos. Después de una primera conversación te enviamos una propuesta detallada con lo que incluye y su valor.",
   },
   {
-    q: "¿Cuánto cuesta un proyecto?",
-    a: "Depende del alcance. Después de una conversación inicial sin costo te enviamos una propuesta con precio cerrado y etapas definidas, para que sepas exactamente qué incluye.",
+    q: "¿Cuánto demora un proyecto?",
+    a: "Depende del tamaño del proyecto y de la disponibilidad de contenidos. Los proyectos más grandes se planifican por etapas, con entregas parciales. El plazo estimado queda definido en la propuesta.",
   },
   {
-    q: "¿Cuánto tiempo toma?",
-    a: "Un sitio corporativo suele estar listo en 3 a 5 semanas. Plataformas e integraciones más complejas se planifican por etapas, con entregas parciales desde el primer mes.",
+    q: "¿El dominio y el hosting están incluidos?",
+    a: "Se define en cada propuesta. Podemos encargarnos de contratar y configurar el dominio y el hosting, o trabajar con los que ya tienes. Te explicamos qué conviene en tu caso y qué costos tiene cada opción.",
   },
   {
-    q: "Ya tengo un sitio web. ¿Pueden mejorarlo?",
-    a: "Sí. Revisamos lo que tienes, te decimos con honestidad qué conviene conservar y qué rehacer, y migramos tu contenido y posicionamiento sin perder lo ganado.",
+    q: "¿Podré administrar mi sitio web?",
+    a: "Si tu proyecto lo requiere, sí. Según el alcance incluimos un panel o gestor de contenidos para que actualices textos, imágenes o productos, y te enseñamos a usarlo.",
   },
   {
-    q: "¿Qué pasa después del lanzamiento?",
-    a: "Te capacitamos para administrar tu contenido y ofrecemos planes de mantención con soporte, respaldos, monitoreo y mejoras continuas.",
+    q: "¿Ofrecen mantenimiento?",
+    a: "Sí. Después del lanzamiento podemos acompañarte con soporte, actualizaciones, respaldos y nuevas funcionalidades. Las condiciones se acuerdan según lo que necesite tu proyecto.",
   },
   {
-    q: "¿El dominio y el código quedan a mi nombre?",
-    a: "Siempre. El dominio, las cuentas y el código fuente son tuyos. Si algún día decides trabajar con otro equipo, puedes hacerlo sin restricciones.",
+    q: "¿Quién es propietario del código y del proyecto?",
+    a: "La propiedad del dominio, las cuentas y el código desarrollado para ti queda establecida por escrito en la propuesta, antes de comenzar. Si tienes requisitos específicos, los conversamos desde el inicio.",
   },
 ];

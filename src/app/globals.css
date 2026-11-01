@@ -3,32 +3,50 @@
 /*
  * Paleta derivada del logo:
  *   brand-700 #164E7F → llaves "{/}"
- *   silver-100 #E2E9EE → wordmark "CLIKIUM"
+ *   silver-100 #E3E9EF → wordmark "CLIKIUM"
  */
 @theme {
-  --color-ink-950: #070d17;
-  --color-ink-900: #0b1422;
-  --color-ink-800: #111d2f;
-  --color-ink-700: #1a2a40;
+  --color-ink-950: #07111f;
+  --color-ink-900: #0c182a;
+  --color-ink-800: #132136;
+  --color-ink-700: #1c2c44;
 
-  --color-silver-50: #f4f7f9;
-  --color-silver-100: #e2e9ee;
-  --color-silver-200: #cdd6de;
-  --color-silver-400: #98a6b5;
-  --color-silver-500: #7c8c9e;
-  --color-silver-700: #4a5868;
+  --color-silver-50: #f4f7fa;
+  --color-silver-100: #e3e9ef;
+  --color-silver-200: #cdd6e0;
+  --color-silver-300: #b5c2d2;
+  --color-silver-400: #98a6b8;
+  --color-silver-500: #7d8ca0;
+  --color-silver-600: #5b697b;
+  --color-silver-700: #46535f;
 
   --color-brand-900: #0e3457;
   --color-brand-700: #164e7f;
   --color-brand-600: #1f5f97;
   --color-brand-500: #2b6ca8;
-  --color-brand-300: #7faad6;
+  --color-brand-300: #79a9dc;
   --color-brand-200: #a9c7e6;
 
   --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 
   --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Entrada del hero en CSS: visible sin esperar a que cargue JavaScript */
+  --animate-rise: rise 1s var(--ease-out-expo) both;
+  --animate-fade-up: fade-up 0.9s var(--ease-out-expo) both;
+
+  @keyframes rise {
+    from {
+      transform: translateY(105%);
+    }
+  }
+  @keyframes fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+  }
 }
 
 @layer base {
@@ -55,15 +73,47 @@
     html {
       scroll-behavior: auto;
     }
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
   }
 }
 
 @utility hairline {
-  border-color: rgb(226 233 238 / 0.08);
+  border-color: rgb(227 233 239 / 0.09);
+}
+
+@utility hairline-dark {
+  border-color: rgb(7 17 31 / 0.12);
 }
 
 @utility text-balance {
   text-wrap: balance;
+}
+
+@utility text-pretty {
+  text-wrap: pretty;
+}
+
+/* Etiqueta editorial: índices, metadatos y rótulos */
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  line-height: 1rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Retícula de marca; el color de línea se define con --grid-line */
+@utility grid-lines {
+  background-image:
+    linear-gradient(to right, var(--grid-line, rgb(227 233 239 / 0.045)) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line, rgb(227 233 239 / 0.045)) 1px, transparent 1px);
+  background-size: 80px 80px;
 }
 
 @utility grain {
@@ -75,5 +125,59 @@
     pointer-events: none;
     opacity: 0.035;
     background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+}
+
+/*
+ * Intro de marca (BrandIntro). Solo existe cuando el script del <head> marca
+ * html[data-intro]; --intro-delay retrasa la entrada del hero hasta que termina.
+ */
+.brand-intro {
+  display: none;
+}
+
+html[data-intro] {
+  --intro-delay: 0.75s;
+
+  .brand-intro {
+    display: grid;
+    animation: intro-out 0.6s var(--ease-out-expo) 0.8s forwards;
+  }
+  .intro-brace-l {
+    animation: intro-brace-l 0.6s var(--ease-out-expo) 0.1s both;
+  }
+  .intro-brace-r {
+    animation: intro-brace-r 0.6s var(--ease-out-expo) 0.1s both;
+  }
+  .intro-slash {
+    animation: intro-slash 0.45s var(--ease-out-expo) 0.3s both;
+  }
+  .intro-word {
+    animation: fade-up 0.5s var(--ease-out-expo) 0.4s both;
+  }
+}
+
+@keyframes intro-brace-l {
+  from {
+    transform: translateX(0.32em);
+    opacity: 0;
+  }
+}
+@keyframes intro-brace-r {
+  from {
+    transform: translateX(-0.32em);
+    opacity: 0;
+  }
+}
+@keyframes intro-slash {
+  from {
+    transform: scaleY(0) skewX(-12deg);
+    opacity: 0;
+  }
+}
+@keyframes intro-out {
+  to {
+    clip-path: inset(0 0 100% 0);
+    visibility: hidden;
   }
 }

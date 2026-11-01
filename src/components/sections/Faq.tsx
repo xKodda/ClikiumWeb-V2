@@ -12,31 +12,63 @@ export function Faq() {
   const baseId = useId();
 
   return (
-    <section id="preguntas" className="border-t hairline py-24 md:py-36">
+    <section id="preguntas" aria-labelledby="preguntas-title" className="py-24 md:py-36">
       <Container>
-        <SectionHeading index="05" label="Preguntas" title="Preguntas frecuentes." />
+        <SectionHeading
+          id="preguntas-title"
+          index="06"
+          label="Preguntas"
+          title="Preguntas frecuentes."
+          intro={
+            <>
+              ¿No encuentras lo que buscas?{" "}
+              <a href="#contacto" className="text-silver-50 underline decoration-silver-50/30 underline-offset-4 transition-colors hover:decoration-brand-300">
+                Escríbenos
+              </a>{" "}
+              y te respondemos directamente.
+            </>
+          }
+        />
 
-        <div className="mt-16 md:mt-24 md:grid md:grid-cols-12">
+        <div className="mt-14 md:mt-20 md:grid md:grid-cols-12">
           <ul className="border-t hairline md:col-span-9 md:col-start-4">
             {faqs.map((faq, i) => {
               const isOpen = open === i;
-              const panelId = `${baseId}-panel-${i}`;
+              const buttonId = `${baseId}-q-${i}`;
+              const panelId = `${baseId}-a-${i}`;
               return (
                 <li key={faq.q} className="border-b hairline">
                   <h3>
                     <button
+                      id={buttonId}
                       type="button"
                       aria-expanded={isOpen}
                       aria-controls={panelId}
                       onClick={() => setOpen(isOpen ? null : i)}
-                      className="flex w-full items-center justify-between gap-6 py-6 text-left text-lg font-medium text-silver-50 transition-colors hover:text-white md:text-xl"
+                      className="group flex w-full items-start gap-4 py-6 text-left md:gap-6 md:py-7"
                     >
-                      {faq.q}
-                      <span aria-hidden className="relative grid size-6 shrink-0 place-items-center">
-                        <span className="absolute h-px w-3.5 bg-silver-400" />
+                      <span aria-hidden className="w-6 shrink-0 pt-1.5 font-mono text-xs text-silver-500 md:pt-2">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span
+                        className={clsx(
+                          "flex-1 text-pretty text-lg font-medium transition-colors duration-300 md:text-xl",
+                          isOpen ? "text-silver-50" : "text-silver-200 group-hover:text-silver-50",
+                        )}
+                      >
+                        {faq.q}
+                      </span>
+                      <span
+                        aria-hidden
+                        className={clsx(
+                          "relative mt-0.5 grid size-8 shrink-0 place-items-center rounded-full border transition-colors duration-300",
+                          isOpen ? "border-brand-300/50" : "hairline group-hover:border-silver-100/30",
+                        )}
+                      >
+                        <span className="absolute h-px w-3 bg-silver-200" />
                         <span
                           className={clsx(
-                            "absolute h-3.5 w-px bg-silver-400 transition-transform duration-300",
+                            "absolute h-3 w-px bg-silver-200 transition-transform duration-300",
                             isOpen && "rotate-90",
                           )}
                         />
@@ -48,13 +80,16 @@ export function Faq() {
                       <motion.div
                         id={panelId}
                         role="region"
+                        aria-labelledby={buttonId}
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                        transition={{ duration: 0.35, ease: [0.16, 1, 0.3, 1] }}
                         className="overflow-hidden"
                       >
-                        <p className="max-w-2xl pb-7 leading-relaxed text-silver-400">{faq.a}</p>
+                        <p className="max-w-2xl pb-7 pl-10 pr-12 text-pretty leading-relaxed text-silver-300 md:pl-12">
+                          {faq.a}
+                        </p>
                       </motion.div>
                     )}
                   </AnimatePresence>

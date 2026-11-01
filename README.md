@@ -27,15 +27,22 @@ src/
 
 Los textos se editan en `src/lib/content.ts` y los datos de contacto en `src/lib/site.ts`, sin tocar los componentes.
 
+Para mostrar una fotografía real en **Quiénes somos**, agrega la imagen en `public/` y completa `about.photo` en `src/lib/content.ts`. Mientras sea `null` se muestra una composición de marca.
+
+Orden de la home: Hero · Servicios · Proyectos y productos · Proceso · Por qué Clikium · Quiénes somos · Preguntas · Contacto.
+
 ## Paleta
 
 Derivada del logo. Tokens definidos en `src/app/globals.css` (`@theme`):
 
 | Token        | Hex       | Uso                              |
 | ------------ | --------- | -------------------------------- |
-| `ink-950`    | `#070D17` | Fondo principal                  |
-| `ink-900`    | `#0B1422` | Secciones alternas               |
-| `silver-100` | `#E2E9EE` | Texto principal (wordmark logo)  |
-| `silver-50`  | `#F4F7F9` | Sección clara                    |
+| `ink-950`    | `#07111F` | Fondo principal                  |
+| `ink-900`    | `#0C182A` | Secciones alternas               |
+| `ink-800`    | `#132136` | Superficies                      |
+| `silver-100` | `#E3E9EF` | Texto principal (wordmark logo)  |
+| `silver-300` | `#B5C2D2` | Texto secundario sobre oscuro    |
+| `silver-50`  | `#F4F7FA` | Secciones claras                 |
+| `silver-600` | `#5B697B` | Texto secundario sobre claro     |
 | `brand-700`  | `#164E7F` | Color de marca (llaves del logo) |
-| `brand-300`  | `#7FAAD6` | Acento sobre fondo oscuro        |
+| `brand-300`  | `#79A9DC` | Acento sobre fondo oscuro        |
